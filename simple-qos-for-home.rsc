@@ -1,8 +1,6 @@
 #Set bandwidth of the interface
 :local interfaceBandwidth 100M
 
-# address-lists
-:for i from=1 to=10 do={/ip firewall address-list add list=WoT address=("login.p"."$i".".worldoftanks.net")}
 #
 /ip firewall mangle
 # prio_1
@@ -17,8 +15,7 @@
     add chain=prerouting action=mark-packet new-packet-mark=prio_2 protocol=udp port=5060,5061,10000-20000 dst-address=10.10.10.10
 # prio_3
     add chain=prerouting action=mark-packet new-packet-mark=prio_3 protocol=tcp port=22
-    add chain=prerouting action=mark-packet new-packet-mark=prio_3 src-address-list=WoT
-    add chain=prerouting action=mark-packet new-packet-mark=prio_3 dst-address-list=WoT
+    add chain=prerouting action=mark-packet new-packet-mark=prio_3 protocol=tcp port=3724
 # prio_4
     add chain=prerouting action=mark-packet new-packet-mark=prio_4 protocol=tcp port=3389
     add chain=prerouting action=mark-packet new-packet-mark=prio_4 protocol=tcp port=80,443
@@ -49,8 +46,6 @@
     add chain=prerouting action=set-priority new-priority=6 protocol=udp port=5060,5061,10000-20000 dst-address=10.10.10.10
 # prio_3
     add chain=prerouting action=set-priority new-priority=5 protocol=tcp port=22
-    add chain=prerouting action=mark-packet new-packet-mark=prio_3 src-address-list=WoT
-    add chain=prerouting action=mark-packet new-packet-mark=prio_3 dst-address-list=WoT
+    add chain=prerouting action=set-priority new-priority=5 protocol=tcp port=3724
 # prio_4
     add chain=prerouting action=set-priority new-priority=3 protocol=tcp port=3389
-
