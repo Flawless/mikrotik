@@ -13,6 +13,7 @@
     add chain=prerouting action=mark-packet new-packet-mark=prio_2 dscp=46
     add chain=prerouting action=mark-packet new-packet-mark=prio_2 protocol=udp port=5060,5061,10000-20000 src-address=10.10.10.10
     add chain=prerouting action=mark-packet new-packet-mark=prio_2 protocol=udp port=5060,5061,10000-20000 dst-address=10.10.10.10
+    add chain=prerouting action=mark-packet new-packet-mark=prio_2 protocol=tcp port=24800
 # prio_3
     add chain=prerouting action=mark-packet new-packet-mark=prio_3 protocol=tcp port=22
     add chain=prerouting action=mark-packet new-packet-mark=prio_3 protocol=tcp port=3724
@@ -44,6 +45,7 @@
     add chain=prerouting action=set-priority new-priority=6 dscp=46
     add chain=prerouting action=set-priority new-priority=6 protocol=udp port=5060,5061,10000-20000 src-address=10.10.10.10
     add chain=prerouting action=set-priority new-priority=6 protocol=udp port=5060,5061,10000-20000 dst-address=10.10.10.10
+    add chain=prerouting action=set-priority new-priority=6 protocol=tcp port=24800
 # prio_3
     add chain=prerouting action=set-priority new-priority=5 protocol=tcp port=22
     add chain=prerouting action=set-priority new-priority=5 protocol=tcp port=3724
